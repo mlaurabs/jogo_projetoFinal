@@ -1,36 +1,47 @@
 import pygame
 from config import *
-global frames, spt_wdt, spt_hgt, direita, esquerda, cima, anim_frame, anim_time, anim_pos_x, anim_pos_y,screen
 
-anim_pos_x = 200 # x inicial
-anim_pos_y = 400 # y inicial
-
+inim_pos_x = 200 # x inicial
+inim_pos_y = 400 # y inicial
+sentido_x = 1
+sentido_y = 1
 # importa textura personagem
 
 def sheets_inimigo_1():
-    global frames, spt_wdt, spt_hgt, direita, esquerda, cima, anim_frame, anim_time, anim_pos_x, anim_pos_y, screen
-    # animacao 
-    direita = []  # vetor de imagens - sentido direita
-    esquerda = []  # vetor de imagens - sentido esquerda
-    cima = []  # vetor de imagens - sentido cima
-    baixo = []  # vetor de imagens - baixo
-    anim_frame = 1
-    anim_time = 0  # variavel para controle do tempo da animação
+    global frames, spt_wdt, spt_hgt, direita, esquerda, cima, inim_pos_x, inim_pos_y, screen, sentido
 
-    #anim_pos_x()
-    #anim_pos_y()
-    
-    frames = pygame.draw.rect(screen,('red'), (anim_pos_x, anim_pos_y, 100, 100))
-    spt_wdt = frames.get_width()
-    spt_hgt = frames.get_height()
 
 # logica da movimentacao
 def inimigoColisao(): # modificar
-    inimigo = pygame.Rect(anim_pos_x, anim_pos_y, 100, 100)
-    return inimigo
+    #inimigo = pygame.Rect(inim_pos_x, inim_pos_y, 100, 100)
+    #return inimigo
+    pass
 
-def animacao_inimigo_1():
-    global direita, esquerda, cima, baixo, sentido, frames, anim_pos_x, anim_pos_y, spt_wdt, spt_hgt, anim_frame, anim_time, old_x, old_y, dt
+def animacao_inimigo(dt):
+    global inim_pos_x, inim_pos_y, sentido_x, sentido_y
+
+    if (sentido_x == 1):  # se ela estiver indo para direita (ida)
+        inim_pos_x += 0.3 * dt
+        if (inim_pos_x > 910):
+            sentido_x = 2
+    elif (sentido_x == 2):  # se ela estiver indo para esquerda (volta)
+        inim_pos_x -= 0.3 * dt
+        if (inim_pos_x < 1):
+            sentido_x = 1
+
+    if(sentido_y == 1): # se ele estiver subindo
+        inim_pos_y += 0.2 * dt
+        if (inim_pos_y > 580):
+            print("sentido a")
+            print((inim_pos_y))
+            sentido_y = 2
+
+    elif(sentido_y == 2): # se ele estiver descendo
+        inim_pos_y -= 0.2 * dt
+        if (inim_pos_y < 1):
+            print("sentido b")
+            sentido_y = 1
+            print((inim_pos_y))
 
 # logia da colisao
 """
@@ -56,7 +67,8 @@ inimigo_rect = pygame.Rect(anim_pos_x, anim_pos_y, spt_wdt, spt_hgt)
                   
 # desenha o personagem animado na tela                    
 def draw_inimigo_1(screen):
-
-   
-   pygame.draw.rect(screen, (255, 0, 0), (anim_pos_x, anim_pos_y, 50, 50))
+   #pygame.draw.rect(screen, (255, 0, 0), (anim_pos_x, anim_pos_y, 50, 50))
+   bomba = pygame.image.load("images/Bomba.png")
+   bomba = pygame.transform.scale(bomba, (48, 48))
+   screen.blit(bomba, (inim_pos_x, inim_pos_y))
  

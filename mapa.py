@@ -19,7 +19,7 @@ def sheets_mapa_1():
 
 # gerando o mapa 1
 
-def retornaKey():
+def getKey():
     return key
 
 def mapa_1():

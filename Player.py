@@ -105,7 +105,7 @@ def animacao_player(dt):
     jogador_rect = pygame.Rect(anim_pos_x, anim_pos_y, spt_wdt, spt_hgt)
     jogador_rect = jogador_rect.inflate(-25, -20)
     textura3 = pygame.transform.scale(pygame.image.load("images/tijolo.png"), (22,22)) # c
-    key = retornaKey()
+    key = getKey()
 
     # verifica se o jogador está em contato com qualquer bloquinho "C"
     for i in range(20):
@@ -115,11 +115,11 @@ def animacao_player(dt):
                     anim_pos_x = old_x
                     anim_pos_y = old_y
 
-    inimigo = inimigoColisao() # modificar
+    #inimigo = inimigoColisao() # modificar
     #inimigo = inimigo.inflate(-25, -20)
     # if collider_jogador.colliderect(collider_mapa):
-    if(pygame.Rect.colliderect(jogador_rect, inimigo)):
-        print("ola")
+    #if(pygame.Rect.colliderect(jogador_rect, inimigo)):
+        #print("ola")
    
     # verifica se o jogador está em contato com a chave   
     for i in range(20):
