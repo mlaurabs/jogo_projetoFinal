@@ -6,4 +6,4 @@ Este repositório é referente a criação de um jogo como projeto final da disc
 - 👩🏻‍💻 MARIA LAURA SOARES
 - 👩🏻‍💻 GABRIEL FARIAS 
 - 👩🏻‍💻 LÚCIO CAMPOS
-- 👩🏻‍💻 Thayná 
+- 👩🏻‍💻 THAYNÁ 
