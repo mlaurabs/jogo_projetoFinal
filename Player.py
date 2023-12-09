@@ -1,5 +1,6 @@
 import pygame
 from mapa import *
+from inimigos import inimigoColisao
 
 # animacao 
 direita = []  # vetor de imagens - sentido direita
@@ -104,9 +105,8 @@ def animacao_player(dt):
     jogador_rect = pygame.Rect(anim_pos_x, anim_pos_y, spt_wdt, spt_hgt)
     jogador_rect = jogador_rect.inflate(-25, -20)
     textura3 = pygame.transform.scale(pygame.image.load("images/tijolo.png"), (22,22)) # c
-    key = pygame.image.load("images/key.png")
+    key = retornaKey()
 
-    
     # verifica se o jogador está em contato com qualquer bloquinho "C"
     for i in range(20):
         for j in range(30):
@@ -114,13 +114,25 @@ def animacao_player(dt):
                 if jogador_rect.colliderect(textura3.get_rect(topleft=(j * 32, i * 32))):
                     anim_pos_x = old_x
                     anim_pos_y = old_y
+
+    inimigo = inimigoColisao() # modificar
+    #inimigo = inimigo.inflate(-25, -20)
+    # if collider_jogador.colliderect(collider_mapa):
+    if(pygame.Rect.colliderect(jogador_rect, inimigo)):
+        print("ola")
    
     # verifica se o jogador está em contato com a chave   
-        if jogador_rect.colliderect(key.get_rect(topleft=(j * 32, i * 32))):
-            anim_pos_x = old_x
-            anim_pos_y = old_y
-                       
-# desenha o personagem animado na tela                    
+    for i in range(20):
+        for j in range(30):
+            if ('K' in mapa[i][j]):
+                key_collide = key.get_rect(topleft=(j*32, i*32))
+                if jogador_rect.colliderect(key_collide.inflate(-25, -20)):
+                    print("encostei na chave")
+                    #aumenta na contagem de chaves
+
+
+
+# desenha o personagem animado na tela
 def draw_player(screen):
     
     if (sentido == "r"):  # direita

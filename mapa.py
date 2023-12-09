@@ -18,6 +18,10 @@ def sheets_mapa_1():
     key = pygame.transform.scale(key, (32, 32))
 
 # gerando o mapa 1
+
+def retornaKey():
+    return key
+
 def mapa_1():
     
     interCol = [0, 5, 10, 15, 20, 25, 29]
@@ -58,6 +62,8 @@ def mapa_1():
     mapa[14][21] = 'C'
     mapa[13][21] = 'C'
     mapa[13][22] = 'C'
+
+    mapa[2][5] += "K"
     
 # desenha mapa na tela     
 def draw_mapa(screen):
@@ -73,9 +79,12 @@ def draw_mapa(screen):
                 screen.blit(textura2, ((j * 32), (i * 32)))
             elif (mapa[i][j] == 'C'):
                 screen.blit(textura3, ((j * 32), (i * 32)))
+            elif('K' in mapa[i][j]):
+                screen.blit(textura1, ((j * 32), (i * 32)))
+                screen.blit(key, ((j * 32), (i * 32)))
 
     screen.blit(tesouro, (850, 220))
-    screen.blit(key, (100, 100))
+
     
 
 
