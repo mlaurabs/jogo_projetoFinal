@@ -3,7 +3,7 @@ from sys import exit
 from config import *
 
 def variaveis_menu():
-    global menu, jogo, opcoes_menu, selecionado_menu, estado_jogo
+    global menu, jogo, opcoes_menu, selecionado_menu, estado_jogo, image
     menu = 0
     jogo = 1
 
