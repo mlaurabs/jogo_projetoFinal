@@ -7,7 +7,7 @@ from menu import *
 
 pygame.init()
 
-
+# a 
 #_________________________Variaveis__________________________#
 fonte = pygame.font.Font(pygame.font.get_default_font(), )   
                                 
