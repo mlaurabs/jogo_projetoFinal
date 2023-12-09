@@ -67,7 +67,7 @@ def draw_menu(screen):
     for i, opcao in enumerate(opcoes_menu):
         cor = (255, 192, 0) if i == selecionado_menu else (255, 255, 255)
         texto_surface = fonte_menu.render(opcao, True, cor)
-        texto_rect = texto_surface.get_rect(center=(width // 2, height // 3 + i * 50))
+        texto_rect = texto_surface.get_rect(center=(width // 2, height // 2.5 + i * 50))
         screen.blit(texto_surface, texto_rect)
 
 def processar_eventos_menu(eventos):
