@@ -4,6 +4,7 @@ import pygame
 width = 32 * 30 # largura da tela
 height = 32 * 20 # altura da tela
 
+
 cor_barra_cheia = (0, 255, 0)
 cor_barra_vazia = (255, 0, 0)
 

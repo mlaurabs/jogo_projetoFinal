@@ -9,7 +9,7 @@ pygame.init()
 
 # a 
 #_________________________Variaveis__________________________#
-fonte = pygame.font.Font(pygame.font.get_default_font(), )   
+fonte_menu = pygame.font.Font("Fonte.ttf", 40)   
                                 
 menu = 0
 jogo = 1
@@ -58,12 +58,15 @@ def draw_screen(screen):
 
 def draw_menu(screen):
     
-    screen.fill((255, 255, 255))
+    image = pygame.image.load("Fundo_Menu.png")
+    image = pygame.transform.scale(image, (960, 660))
+    screen.blit(image, (0, 0))
+    
     
     # opções do menu
     for i, opcao in enumerate(opcoes_menu):
-        cor = (255, 0, 0) if i == selecionado_menu else (0, 0, 0)
-        texto_surface = fonte.render(opcao, True, cor)
+        cor = (255, 192, 0) if i == selecionado_menu else (255, 255, 255)
+        texto_surface = fonte_menu.render(opcao, True, cor)
         texto_rect = texto_surface.get_rect(center=(width // 2, height // 3 + i * 50))
         screen.blit(texto_surface, texto_rect)
 
