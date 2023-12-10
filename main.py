@@ -50,12 +50,10 @@ def draw_screen(screen):
     global direita, esquerda, cima, baixo, sentido, frames, anim_pos_x, anim_pos_y, spt_wdt, spt_hgt, anim_frame
  
     draw_mapa(screen)
-    
     draw_player(screen)
-    
-    draw_inimigo_1(screen)
-    
+    #draw_inimigo_1(screen)
     barra_de_vida(screen) # config
+    chaves(screen)
     
 def draw_objetivo(screen):
     screen.fill((255, 255, 255))
