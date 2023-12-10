@@ -17,6 +17,7 @@ jogo = 1
 opcoes_menu = ['Novo Jogo','Continuar', 'Sair']
 selecionado_menu = 0
 estado_jogo = menu
+objetivo = 2
 
 anim_pos_x = 20 # x inicial
 anim_pos_y = 500 # y inicial
@@ -44,7 +45,7 @@ def update(dt):
     animacao_player(dt)
 
     animacao_inimigo_1()
-    
+      
 def draw_screen(screen):
     global direita, esquerda, cima, baixo, sentido, frames, anim_pos_x, anim_pos_y, spt_wdt, spt_hgt, anim_frame
  
@@ -55,7 +56,15 @@ def draw_screen(screen):
     draw_inimigo_1(screen)
     
     barra_de_vida(screen) # config
-
+    
+def draw_objetivo(screen):
+    screen.fill((255, 255, 255))
+    fonte = pygame.font.Font(None, 36)
+    texto = "Objetivos do Jogo"
+    texto_surface = fonte.render(texto, True, (0, 0, 0))
+    texto_retangulo = texto_surface.get_rect(center=(width // 2, height // 2))
+    screen.blit(texto_surface, texto_retangulo) 
+    
 def draw_menu(screen):
     
     image = pygame.image.load("Fundo_Menu.png")
@@ -71,7 +80,7 @@ def draw_menu(screen):
         screen.blit(texto_surface, texto_rect)
 
 def processar_eventos_menu(eventos):
-    global estado_jogo, selecionado_menu
+    global estado_jogo, selecionado_menu, objetivo
 
     for evento in eventos:
         if evento.type == pygame.QUIT:
@@ -86,7 +95,8 @@ def processar_eventos_menu(eventos):
                 if selecionado_menu == 0:
                     estado_jogo = jogo
                 elif selecionado_menu == 1:
-                    estado_jogo = jogo
+                    estado_jogo = objetivo
+                    draw_objetivo(screen)
                 elif selecionado_menu == 2:
                     pygame.quit()
                     exit()
