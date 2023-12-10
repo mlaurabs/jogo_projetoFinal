@@ -52,7 +52,7 @@ def draw_screen(screen):
  
     draw_mapa(screen)
     draw_player(screen)
-    #draw_inimigo_1(screen)
+    draw_inimigo_1(screen)
     barra_de_vida(screen) # config
     chaves(screen)
     

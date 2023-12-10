@@ -1,7 +1,7 @@
 import pygame
 from mapa import *
 from config import *
-from inimigos import getBomba_V1, getBomba_V2
+from inimigos import getBomba_V1, getBomba_V2, getInimsPos
 
 # animacao 
 direita = []  # vetor de imagens - sentido direita
@@ -10,7 +10,7 @@ cima = []  # vetor de imagens - sentido cima
 baixo = []  # vetor de imagens - baixo
 anim_frame = 1
 anim_time = 0  # variavel para controle do tempo da animação
-
+qtdChaves = 0 # variavel que vai atualizar a pontuação
 anim_pos_x = 20 # x inicial
 anim_pos_y = 270 # y inicial
 
@@ -49,10 +49,12 @@ def sheets_player():
         baixo.append(tupla)
     print(baixo)
 
+
 # logica da movimentacao + colisoes 
 def animacao_player(dt):
-    global direita, esquerda, cima, baixo, sentido, frames, anim_pos_x, anim_pos_y, spt_wdt, spt_hgt, anim_frame, anim_time, old_x, old_y
-    
+    global direita, esquerda, cima, baixo, sentido, frames, anim_pos_x, anim_pos_y, spt_wdt, spt_hgt, anim_frame, anim_time, old_x, old_y,  chave, aux, qtdChaves
+
+
     old_x = anim_pos_x
     old_y = anim_pos_y
 
@@ -109,6 +111,8 @@ def animacao_player(dt):
     textura3 = pygame.transform.scale(pygame.image.load("images/tijolo.png"), (22,22)) # c
     key = getKey()
 
+
+
     # verifica se o jogador está em contato com qualquer bloquinho "C"
     for i in range(20):
         for j in range(30):
@@ -117,23 +121,27 @@ def animacao_player(dt):
                     anim_pos_x = old_x
                     anim_pos_y = old_y
 
-    #inimigo = inimigoColisao() # modificar
-    #inimigo = inimigo.inflate(-25, -20)
-    # if collider_jogador.colliderect(collider_mapa):
+    bomba1 = getBomba_V1()
+    bomba2 = getBomba_V2()
+    posBombas = getInimsPos()
+    if jogador_rect.colliderect(bomba1.get_rect(topleft=(posBombas[0], posBombas[1]))) or jogador_rect.colliderect(bomba2.get_rect(topleft=(posBombas[2], posBombas[3]))):
+        print("colidiu com a bomba")
 
-#if(pygame.Rect.colliderect(jogador_rect, inimigo)):
-    #colidiu = 'colidiu'
-    #print(colidiu)
-        
-
+    aux = 0
     # verifica se o jogador está em contato com a chave
     for i in range(20):
         for j in range(30):
             if ('K' in mapa[i][j]):
                 key_collide = key.get_rect(topleft=(j*32, i*32))
                 if jogador_rect.colliderect(key_collide.inflate(-25, -20)):
-                    print("encostei na chave")
-                    #aumenta na contagem de chaves
+                    str = mapa[i][j]
+                    str = str.replace("K", "")
+                    mapa[i][j] = str
+                    pygame.display.update()
+                    qtdChaves +=1
+
+def getQtdChaves(): # retorna a quantidade de chaves do momento
+    return qtdChaves
 
 # desenha o personagem animado na tela
 def draw_player(screen):
