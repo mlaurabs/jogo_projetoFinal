@@ -14,10 +14,11 @@ fonte_menu = pygame.font.Font("Fonte.ttf", 40)
 menu = 0
 jogo = 1
 
-opcoes_menu = ['Novo Jogo','Continuar', 'Sair']
+opcoes_menu = ['Novo Jogo','Objetivo', 'Sair']
 selecionado_menu = 0
 estado_jogo = menu
 objetivo = 2
+selecionado = 0
 
 anim_pos_x = 20 # x inicial
 anim_pos_y = 500 # y inicial
@@ -56,13 +57,23 @@ def draw_screen(screen):
     chaves(screen)
     
 def draw_objetivo(screen):
-    screen.fill((255, 255, 255))
-    fonte = pygame.font.Font(None, 36)
-    texto = "Objetivos do Jogo"
-    texto_surface = fonte.render(texto, True, (0, 0, 0))
-    texto_retangulo = texto_surface.get_rect(center=(width // 2, height // 2))
+    image = pygame.image.load("Objetivo.png")
+    image = pygame.transform.scale(image, (960, 660))
+    screen.blit(image, (0, 0))
+    fonte = pygame.font.Font("Fonte.ttf", 40) 
+    texto = "Voltar"
+    texto_surface = fonte.render(texto, True, (255, 192, 0))
+    texto_retangulo = texto_surface.get_rect(center=(width -100, height -60))
     screen.blit(texto_surface, texto_retangulo) 
-    
+
+def processar_eventos_obj(eventos):
+    global selecionado, estado_jogo, menu
+    for evento in eventos:
+        if evento.type == pygame.KEYDOWN:
+            if selecionado == 0:
+                estado_jogo = menu
+                draw_menu(screen)
+                    
 def draw_menu(screen):
     
     image = pygame.image.load("Fundo_Menu.png")
