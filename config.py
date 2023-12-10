@@ -15,9 +15,10 @@ largura_barra = 200
 altura_barra = 20
 posicao_barra = [50, 20]
 vida_maxima = 100
+vida_atual = 100
 
 def barra_de_vida(screen):
-    vida_atual = vida_Atual()
+    vida_atual = getVidaAtual()
     pygame.draw.rect(screen, cor_barra_cheia, (posicao_barra[0], posicao_barra[1], largura_barra, altura_barra))
     largura_atual = int((vida_atual / vida_maxima) * largura_barra)
     pygame.draw.rect(screen, cor_barra_vazia, (posicao_barra[0] + largura_atual, posicao_barra[1], largura_barra - largura_atual, altura_barra))

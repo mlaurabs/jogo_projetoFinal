@@ -92,14 +92,12 @@ def mapa_1():
     row = 0
     col = 0
     for x in range(5): # espalhando as chaves aleatoriamente entre os trechos escolhidos
-        print(x)
         linha = []
         coluna = []
         pos = escoheAleatorio(linha, coluna)
         row = pos[0]
         col = pos[1]
         if(mapa[row][col] == "C"):
-            print(f"row = {row}  col = {col}")
             while(mapa[row][col] == "C"):
                 pos = escoheAleatorio(linha, coluna)
                 row = pos[0]

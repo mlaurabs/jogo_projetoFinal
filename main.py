@@ -26,7 +26,8 @@ anim_pos_y = 500 # y inicial
 
 
 def load():
-    global clock, mapa, texture1, texture2, texture3, bau, tocha, tesouro, key, direita, esquerda, cima, baixo, sentido, frames, spt_wdt, spt_hgt, jogador_rect, interCol  
+    global clock, mapa, texture1, texture2, texture3, bau, tocha, tesouro, key, direita, esquerda, cima, baixo, sentido, frames, spt_wdt, spt_hgt, jogador_rect, interCol
+
     
   # frame por segundo
     clock = pygame.time.Clock()
@@ -49,7 +50,6 @@ def update(dt):
     
 def draw_screen(screen):
     global direita, esquerda, cima, baixo, sentido, frames, anim_pos_x, anim_pos_y, spt_wdt, spt_hgt, anim_frame
- 
     draw_mapa(screen)
     draw_player(screen)
     draw_inimigo_1(screen)
@@ -79,8 +79,7 @@ def draw_menu(screen):
     image = pygame.image.load("Fundo_Menu.png")
     image = pygame.transform.scale(image, (960, 660))
     screen.blit(image, (0, 0))
-    
-    
+
     # opções do menu
     for i, opcao in enumerate(opcoes_menu):
         cor = (255, 192, 0) if i == selecionado_menu else (255, 255, 255)
