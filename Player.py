@@ -127,7 +127,6 @@ def animacao_player(dt):
     if jogador_rect.colliderect(bomba1.get_rect(topleft=(posBombas[0], posBombas[1]))) or jogador_rect.colliderect(bomba2.get_rect(topleft=(posBombas[2], posBombas[3]))):
         print("colidiu com a bomba")
 
-    aux = 0
     # verifica se o jogador está em contato com a chave
     for i in range(20):
         for j in range(30):

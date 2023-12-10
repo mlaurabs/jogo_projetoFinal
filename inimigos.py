@@ -17,7 +17,7 @@ sentido_y_v2 = 1
 
 bomba_v1 = pygame.transform.scale(bomba_v1, (48, 48))
 bomba_v2 = pygame.transform.scale(bomba_v2, (48, 48))
-
+explosao = pygame.image.load("images/Explosão.png")
 
 def sheets_inimigo_1():
     global frames, spt_wdt, spt_hgt, direita, esquerda, cima, inim_pos_x, inim_pos_y, screen, sentido, bomba_v1, bomba_v2
