@@ -101,7 +101,6 @@ def animacao_player(dt):
                 anim_frame = 0
             anim_time = 0
 
-   
     jogador_rect = pygame.Rect(anim_pos_x, anim_pos_y, spt_wdt, spt_hgt)
     jogador_rect = jogador_rect.inflate(-25, -20)
     textura3 = pygame.transform.scale(pygame.image.load("images/tijolo.png"), (22,22)) # c
@@ -166,8 +165,8 @@ def draw_player(screen):
         exp = getExplosao()
         screen.blit(exp, (anim_pos_x, anim_pos_y))
         # colocar o cavaleiro para longe da bomba com o impacto
-        anim_pos_x = colide[0] + 250
-        anim_pos_y = colide[1] + 200
+        anim_pos_x = colide[0] + 200
+        anim_pos_y = colide[1] + 150
 
     if (sentido == "r"):  # direita
         aux = direita[anim_frame]
