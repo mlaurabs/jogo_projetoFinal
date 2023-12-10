@@ -14,10 +14,10 @@ def sheets_mapa_1():
     textura2 = pygame.image.load("images/textura2.png") # B
     fundo = pygame.image.load("images/fundoEscuro.png") # E
     textura3 = pygame.transform.scale(pygame.image.load("images/tijolo.png"), (32,32)) # c
-    bau = pygame.image.load("images/bauDaMorte.png")
-    tocha = pygame.image.load("images/foguinho.png")
-    tesouro = pygame.image.load("images/tesouroFinal.png")
+    tocha = pygame.image.load("images/Tocha.png")
+    tesouro = pygame.image.load("images/Tesouro.png")
     key = pygame.image.load("images/key.png")
+    tesouro = pygame.transform.scale(tesouro, (80, 60))
     key = pygame.transform.scale(key, (32, 32))
 
 # gerando o mapa 1
@@ -127,7 +127,7 @@ def draw_mapa(screen):
             elif('K' in mapa[i][j]):
                 screen.blit(textura1, ((j * 32), (i * 32)))
                 screen.blit(key, ((j * 32), (i * 32)))
-    screen.blit(tesouro, (850, 220))
+    screen.blit(tesouro, (850, 570))
 
 
 

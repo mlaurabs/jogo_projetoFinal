@@ -119,7 +119,7 @@ def main_loop(screen):
             processar_eventos_menu(eventos)
             draw_menu(screen)
         elif estado_jogo == objetivo:
-            processar_eventos_menu(eventos)
+            processar_eventos_obj(eventos)
             draw_objetivo(screen)
             
         elif estado_jogo == jogo:
