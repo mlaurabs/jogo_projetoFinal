@@ -1,11 +1,7 @@
 import pygame
 from mapa import *
-<<<<<<< HEAD
-from inimigos import inimigoColisao
 from config import *
-=======
 from inimigos import getBomba_V1, getBomba_V2
->>>>>>> 7da05fa4b5be5ccd543b2d6130882d9c47d6f421
 
 # animacao 
 direita = []  # vetor de imagens - sentido direita
@@ -124,18 +120,13 @@ def animacao_player(dt):
     #inimigo = inimigoColisao() # modificar
     #inimigo = inimigo.inflate(-25, -20)
     # if collider_jogador.colliderect(collider_mapa):
-<<<<<<< HEAD
-    if(pygame.Rect.colliderect(jogador_rect, inimigo)):
-        colidiu = 'colidiu'
-        print(colidiu)
+
+#if(pygame.Rect.colliderect(jogador_rect, inimigo)):
+    #colidiu = 'colidiu'
+    #print(colidiu)
         
-        
-=======
-    #if(pygame.Rect.colliderect(jogador_rect, inimigo)):
-        #print("ola")
-   
->>>>>>> 7da05fa4b5be5ccd543b2d6130882d9c47d6f421
-    # verifica se o jogador está em contato com a chave   
+
+    # verifica se o jogador está em contato com a chave
     for i in range(20):
         for j in range(30):
             if ('K' in mapa[i][j]):

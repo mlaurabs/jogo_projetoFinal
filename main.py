@@ -44,7 +44,7 @@ def update(dt):
     # animacao personagem principal  + colisão      
     animacao_player(dt)
 
-    animacao_inimigo_1()
+    animacao_inimigo(dt)
     
 def draw_screen(screen):
     global direita, esquerda, cima, baixo, sentido, frames, anim_pos_x, anim_pos_y, spt_wdt, spt_hgt, anim_frame

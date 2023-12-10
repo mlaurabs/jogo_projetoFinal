@@ -6,10 +6,11 @@ interCol = [0, 5, 10, 15, 20, 25, 29]
 
 # importar sheets mapa 1
 def sheets_mapa_1():
-    global textura1, textura2, textura3, bau, tocha, tesouro, key
+    global textura1, textura2, textura3, bau, tocha, tesouro, key, fundo
     
     textura1 = pygame.image.load("images/texture1.png") # A
     textura2 = pygame.image.load("images/textura2.png") # B
+    fundo = pygame.image.load("images/fundoEscuro.png") # E
     textura3 = pygame.transform.scale(pygame.image.load("images/tijolo.png"), (32,32)) # c
     bau = pygame.image.load("images/bauDaMorte.png")
     tocha = pygame.image.load("images/foguinho.png")
@@ -29,13 +30,18 @@ def mapa_1():
     for i in range(20):
         linha = []
         for j in range(30):
-            if (j % 2 == 0):
-                linha.append('A')
-            elif (j % 2 != 0):
-                linha.append('B')
-            if (j in interCol):
-                if (i <= 5 or i >= 15 ):
-                    linha.append('C')
+            if(i < 2):
+                linha.append('E')
+            else:
+                if (j % 2 == 0):
+                    linha.append('A')
+                elif (j % 2 != 0):
+                    linha.append('B')
+                if (j in interCol):
+                    if (i <= 8 and i > 1):
+                        linha.append('C')
+                    if(i >= 15):
+                        linha.append('C')
 
         mapa.append(linha)
     
@@ -63,7 +69,7 @@ def mapa_1():
     mapa[13][21] = 'C'
     mapa[13][22] = 'C'
 
-    mapa[2][5] += "K"
+    mapa[10][5] += "K"
     
 # desenha mapa na tela     
 def draw_mapa(screen):
@@ -73,7 +79,9 @@ def draw_mapa(screen):
    
     for i in range(20):
         for j in range(30):
-            if (mapa[i][j] == 'A'):
+            if(mapa[i][j] == 'E'):
+                screen.blit(fundo, ((j * 32), (i * 32)))
+            elif (mapa[i][j] == 'A'):
                 screen.blit(textura1, ((j * 32), (i * 32)))
             elif (mapa[i][j] == 'B'):
                 screen.blit(textura2, ((j * 32), (i * 32)))
