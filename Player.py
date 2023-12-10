@@ -1,6 +1,6 @@
 import pygame
 from mapa import *
-from inimigos import inimigoColisao
+from inimigos import getBomba_V1, getBomba_V2
 
 # animacao 
 direita = []  # vetor de imagens - sentido direita
