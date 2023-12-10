@@ -15,6 +15,8 @@ anim_pos_x = 20 # x inicial
 anim_pos_y = 270 # y inicial
 vida_atual = 100
 
+objetos_colididos = []
+
 sentido = "r"
 
 
@@ -126,9 +128,11 @@ def animacao_player(dt):
     bomba2 = getBomba_V2()
     posBombas = getInimsPos()
         
-        
-    if jogador_rect.colliderect(bomba1.get_rect(topleft=(posBombas[0], posBombas[1]))) or jogador_rect.colliderect(bomba2.get_rect(topleft=(posBombas[2], posBombas[3]))):
+    
+   
+    if bomba1 and bomba2 not in objetos_colididos and (jogador_rect.colliderect(bomba1.get_rect(topleft=(posBombas[0], posBombas[1]))) or jogador_rect.colliderect(bomba2.get_rect(topleft=(posBombas[2], posBombas[3])))):
        vida_atual -= 25
+       print('colisão ocorreu')
     aux = 0
     # verifica se o jogador está em contato com a chave
     for i in range(20):

@@ -13,11 +13,15 @@ fonte_menu = pygame.font.Font("Fonte.ttf", 40)
                                 
 menu = 0
 jogo = 1
+objetivo = 2
+derrota = False
+
 
 opcoes_menu = ['Novo Jogo','Objetivo', 'Sair']
+
 selecionado_menu = 0
+
 estado_jogo = menu
-objetivo = 2
 selecionado = 0
 
 anim_pos_x = 20 # x inicial
@@ -88,6 +92,14 @@ def draw_menu(screen):
         texto_rect = texto_surface.get_rect(center=(width // 2, height // 2.5 + i * 50))
         screen.blit(texto_surface, texto_rect)
 
+def draw_vitoria(screen):
+    screen.fill(255,255,255)
+    fonte = pygame.font.Font("Fonte.ttf", 40)
+    texto = "Parabens você ganhou"
+    texto_surface = fonte.render(texto, True, (255, 192, 0))
+    texto_retangulo = texto_surface.get_rect(center=(width/2, height/2))
+    screen.blit(texto_surface, texto_retangulo) 
+   
 def processar_eventos_menu(eventos):
     global estado_jogo, selecionado_menu, objetivo
     variaveis_menu()
@@ -112,16 +124,18 @@ def processar_eventos_menu(eventos):
 
 def main_loop(screen):
     global clock, estado_jogo
+    
     while True:
         eventos = pygame.event.get()
-        
         if estado_jogo == menu:
             processar_eventos_menu(eventos)
             draw_menu(screen)
         elif estado_jogo == objetivo:
             processar_eventos_obj(eventos)
             draw_objetivo(screen)
-            
+        elif estado_jogo == derrota:
+            processar_eventos_derrota(eventos)
+            draw_derrota(screen)
         elif estado_jogo == jogo:
             for evento in eventos:
                 if evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE:
@@ -134,7 +148,7 @@ def main_loop(screen):
 
         pygame.display.update()
         clock.tick(60)
-
+        
 pygame.init()
 screen = pygame.display.set_mode((width, height))
 load()
