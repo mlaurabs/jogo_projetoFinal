@@ -72,6 +72,8 @@ def animacao_inimigo(dt):
         if (inim_pos_y_v2 < 1):
             sentido_y_v2 = 1
 
+def getInimsPos():
+    return [inim_pos_x_v1, inim_pos_y_v1, inim_pos_x_v2, inim_pos_y_v2]
 
 # desenha o personagem animado na tela
 def draw_inimigo_1(screen):
