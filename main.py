@@ -93,13 +93,17 @@ def draw_menu(screen):
         screen.blit(texto_surface, texto_rect)
 
 def draw_vitoria(screen):
-    screen.fill(255,255,255)
-    fonte = pygame.font.Font("Fonte.ttf", 40)
-    texto = "Parabens você ganhou"
-    texto_surface = fonte.render(texto, True, (255, 192, 0))
-    texto_retangulo = texto_surface.get_rect(center=(width/2, height/2))
+
+    image = pygame.image.load("Ganhou.png")
+    image = pygame.transform.scale(image, (960, 660))
+    screen.blit(image, (0, 0))
+
+    fonte = pygame.font.Font("Fonte.ttf", 40) 
+    texto = "Ir para o menu"
+    texto_surface = fonte.render(texto, True, (255, 255, 255))
+    texto_retangulo = texto_surface.get_rect(center=(width -100, height -60))
     screen.blit(texto_surface, texto_retangulo) 
-   
+    
 def processar_eventos_menu(eventos):
     global estado_jogo, selecionado_menu, objetivo
     variaveis_menu()
