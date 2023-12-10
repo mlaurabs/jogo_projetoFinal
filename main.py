@@ -45,7 +45,7 @@ def update(dt):
     animacao_player(dt)
 
     animacao_inimigo_1()
-      
+    
 def draw_screen(screen):
     global direita, esquerda, cima, baixo, sentido, frames, anim_pos_x, anim_pos_y, spt_wdt, spt_hgt, anim_frame
  
