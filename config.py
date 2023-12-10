@@ -24,7 +24,7 @@ def barra_de_vida(screen):
 
 def chaves(screen):
     qtdKeys = getQtdChaves() # pega a quantidade de chaves atualizada
-    fonte = pygame.font.Font(None, 36)
+    fonte = pygame.font.Font("Fonte.ttf", 36)
     texto = f"Chaves: {qtdKeys}/5"
     text = fonte.render(texto, True, (255, 192, 0))
-    screen.blit(text, (720, 20))
+    screen.blit(text, (720, 15))
