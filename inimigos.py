@@ -77,6 +77,6 @@ def getInimsPos():
 
 # desenha o personagem animado na tela
 def draw_inimigo_1(screen):
-    global bomba_v1, bomba_v2
+    global bomba_v1, bomba_v2, bomba_v1_visivel, bomba_v2_visivel
     screen.blit(bomba_v1, (inim_pos_x_v1, inim_pos_y_v1))
     screen.blit(bomba_v2, (inim_pos_x_v2, inim_pos_y_v2))

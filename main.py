@@ -14,7 +14,7 @@ fonte_menu = pygame.font.Font("Fonte.ttf", 40)
 menu = 0
 jogo = 1
 
-opcoes_menu = ['Novo Jogo','Continuar', 'Sair']
+opcoes_menu = ['Novo Jogo','Objetivo', 'Sair']
 selecionado_menu = 0
 estado_jogo = menu
 objetivo = 2

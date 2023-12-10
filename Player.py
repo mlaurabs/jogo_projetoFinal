@@ -13,6 +13,7 @@ anim_time = 0  # variavel para controle do tempo da animação
 qtdChaves = 0 # variavel que vai atualizar a pontuação
 anim_pos_x = 20 # x inicial
 anim_pos_y = 270 # y inicial
+vida_atual = 100
 
 sentido = "r"
 
@@ -52,8 +53,8 @@ def sheets_player():
 
 # logica da movimentacao + colisoes 
 def animacao_player(dt):
-    global direita, esquerda, cima, baixo, sentido, frames, anim_pos_x, anim_pos_y, spt_wdt, spt_hgt, anim_frame, anim_time, old_x, old_y,  chave, aux, qtdChaves
-
+    global direita, esquerda, cima, baixo, sentido, frames, anim_pos_x, anim_pos_y, spt_wdt, spt_hgt, anim_frame, anim_time, old_x, old_y, qtdChaves, vida_atual
+    
 
     old_x = anim_pos_x
     old_y = anim_pos_y
@@ -111,7 +112,7 @@ def animacao_player(dt):
     textura3 = pygame.transform.scale(pygame.image.load("images/tijolo.png"), (22,22)) # c
     key = getKey()
 
-
+    
 
     # verifica se o jogador está em contato com qualquer bloquinho "C"
     for i in range(20):
@@ -124,9 +125,10 @@ def animacao_player(dt):
     bomba1 = getBomba_V1()
     bomba2 = getBomba_V2()
     posBombas = getInimsPos()
+        
+        
     if jogador_rect.colliderect(bomba1.get_rect(topleft=(posBombas[0], posBombas[1]))) or jogador_rect.colliderect(bomba2.get_rect(topleft=(posBombas[2], posBombas[3]))):
-        print("colidiu com a bomba")
-
+       vida_atual -= 25
     aux = 0
     # verifica se o jogador está em contato com a chave
     for i in range(20):
@@ -142,6 +144,9 @@ def animacao_player(dt):
 
 def getQtdChaves(): # retorna a quantidade de chaves do momento
     return qtdChaves
+
+def vida_Atual(): # retorna a quantidade de chaves do momento
+    return vida_atual
 
 # desenha o personagem animado na tela
 def draw_player(screen):
