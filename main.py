@@ -79,7 +79,7 @@ def draw_menu(screen):
 
 def processar_eventos_menu(eventos):
     global estado_jogo, selecionado_menu, objetivo
-
+    variaveis_menu()
     for evento in eventos:
         if evento.type == pygame.QUIT:
             pygame.quit()
@@ -107,6 +107,10 @@ def main_loop(screen):
         if estado_jogo == menu:
             processar_eventos_menu(eventos)
             draw_menu(screen)
+        elif estado_jogo == objetivo:
+            processar_eventos_menu(eventos)
+            draw_objetivo(screen)
+            
         elif estado_jogo == jogo:
             for evento in eventos:
                 if evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE:
