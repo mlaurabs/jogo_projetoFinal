@@ -33,7 +33,8 @@ anim_pos_y = 500 # y inicial
 
 
 def load():
-    global clock, mapa, texture1, texture2, texture3, bau, tocha, tesouro, key, direita, esquerda, cima, baixo, sentido, frames, spt_wdt, spt_hgt, jogador_rect, interCol  
+    global clock, mapa, texture1, texture2, texture3, bau, tocha, tesouro, key, direita, esquerda, cima, baixo, sentido, frames, spt_wdt, spt_hgt, jogador_rect, interCol
+
     
   # frame por segundo
     clock = pygame.time.Clock()
@@ -59,7 +60,6 @@ def get_estado_jogo():
 
 def draw_screen(screen):
     global direita, esquerda, cima, baixo, sentido, frames, anim_pos_x, anim_pos_y, spt_wdt, spt_hgt, anim_frame
- 
     draw_mapa(screen)
     draw_player(screen)
     draw_inimigo_1(screen)

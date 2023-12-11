@@ -14,12 +14,9 @@ qtdChaves = 0 # variavel que vai atualizar a pontuação
 anim_pos_x = 20 # x inicial
 anim_pos_y = 270 # y inicial
 vida_atual = 100
-
-objetos_colididos = []
-
+colisao = False
 sentido = "r"
-
-
+colide = []
 def sheets_player():
     global frames, spt_wdt, spt_hgt, direita, esquerda, cima, anim_frame, anim_time, anim_pos_x, anim_pos_y
     
@@ -38,25 +35,21 @@ def sheets_player():
     for j in range(4):
         tupla = (j * spt_wdt, i * spt_hgt)
         direita.append(tupla)
-    print(direita)
 
     i = 1  # sentido para cima
     for j in range(4):
         tupla = (j * spt_wdt, i * spt_hgt)
         esquerda.append(tupla)
-    print(esquerda)
 
     i = 0  # sentido para baixo
     for j in range(4):
         tupla = (j * spt_wdt, i * spt_hgt)
         baixo.append(tupla)
-    print(baixo)
 
 
 # logica da movimentacao + colisoes 
 def animacao_player(dt):
-    global direita, esquerda, cima, baixo, sentido, frames, anim_pos_x, anim_pos_y, spt_wdt, spt_hgt, anim_frame, anim_time, old_x, old_y, qtdChaves, vida_atual
-    
+    global direita, esquerda, cima, baixo, sentido, frames, anim_pos_x, anim_pos_y, spt_wdt, spt_hgt, anim_frame, anim_time, old_x, old_y, qtdChaves, posBombas, colisao, vida_atual, colide
 
     old_x = anim_pos_x
     old_y = anim_pos_y
@@ -108,13 +101,10 @@ def animacao_player(dt):
                 anim_frame = 0
             anim_time = 0
 
-   
     jogador_rect = pygame.Rect(anim_pos_x, anim_pos_y, spt_wdt, spt_hgt)
     jogador_rect = jogador_rect.inflate(-25, -20)
     textura3 = pygame.transform.scale(pygame.image.load("images/tijolo.png"), (22,22)) # c
     key = getKey()
-
-    
 
     # verifica se o jogador está em contato com qualquer bloquinho "C"
     for i in range(20):
@@ -127,13 +117,23 @@ def animacao_player(dt):
     bomba1 = getBomba_V1()
     bomba2 = getBomba_V2()
     posBombas = getInimsPos()
-        
-    
-   
-    if bomba1 and bomba2 not in objetos_colididos and (jogador_rect.colliderect(bomba1.get_rect(topleft=(posBombas[0], posBombas[1]))) or jogador_rect.colliderect(bomba2.get_rect(topleft=(posBombas[2], posBombas[3])))):
-       vida_atual -= 25
-       print('colisão ocorreu')
-    aux = 0
+
+    # verifica qual bomba atingiu o personagem
+    tipo = 0
+    if(jogador_rect.colliderect(bomba1.get_rect(topleft=(posBombas[0], posBombas[1])))):
+        tipo = 1
+    if(jogador_rect.colliderect(bomba2.get_rect(topleft=(posBombas[2], posBombas[3])))):
+        tipo = 2
+    if(tipo > 0):
+        colisao = True
+        # guarda em uma lista a posição x e a posição y do cavaleiro
+        if(tipo == 1):
+            colide.append(posBombas[0])
+            colide.append(posBombas[1])
+        elif(tipo == 2):
+            colide.append(posBombas[2])
+            colide.append(posBombas[3])
+
     # verifica se o jogador está em contato com a chave
     for i in range(20):
         for j in range(30):
@@ -146,15 +146,28 @@ def animacao_player(dt):
                     pygame.display.update()
                     qtdChaves +=1
 
+def getColisao():
+    return colisao
+
 def getQtdChaves(): # retorna a quantidade de chaves do momento
     return qtdChaves
 
-def vida_Atual(): # retorna a quantidade de chaves do momento
+def getVidaAtual(): # retorna a quantidade de chaves do momento
     return vida_atual
 
 # desenha o personagem animado na tela
 def draw_player(screen):
-    
+    global anim_pos_x, anim_pos_y, colisao, vida_atual
+    if(colisao == True):
+        print("entrei na condição de explosão")
+        colisao = False
+        vida_atual -= 25
+        exp = getExplosao()
+        screen.blit(exp, (anim_pos_x, anim_pos_y))
+        # colocar o cavaleiro para longe da bomba com o impacto
+        anim_pos_x = colide[0] + 200
+        anim_pos_y = colide[1] + 150
+
     if (sentido == "r"):  # direita
         aux = direita[anim_frame]
         screen.blit(frames, (anim_pos_x, anim_pos_y),

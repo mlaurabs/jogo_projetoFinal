@@ -18,6 +18,7 @@ largura_barra = 200
 altura_barra = 20
 posicao_barra = [50, 20]
 vida_maxima = 100
+vida_atual = 100
 
 def barra_de_vida(screen):
     global estado, derrota
