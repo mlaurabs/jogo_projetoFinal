@@ -1,6 +1,6 @@
 import pygame
 from mapa import *
-from config import *
+from configuration import *
 from inimigos import getBomba_V1, getBomba_V2, getInimsPos
 
 # animacao 

@@ -1,7 +1,7 @@
 import pygame
 from Player import *
 from inimigos import *
-from main import *
+from main import draw_derrota, get_estado_jogo
 from mapa import *
 
 
@@ -20,17 +20,17 @@ posicao_barra = [50, 20]
 vida_maxima = 100
 
 def barra_de_vida(screen):
-    global estado_jogo, derrota
+    global estado, derrota
     vida_atual = vida_Atual()
-    if vida_atual <= -1:
-        estado_jogo = derrota
+    if vida_atual == -25:
+        estado = derrota
         draw_derrota(screen)
     else:
         pygame.draw.rect(screen, cor_barra_cheia, (posicao_barra[0], posicao_barra[1], largura_barra, altura_barra))
         largura_atual = int((vida_atual / vida_maxima) * largura_barra)
         pygame.draw.rect(screen, cor_barra_vazia, (posicao_barra[0] + largura_atual, posicao_barra[1], largura_barra - largura_atual, altura_barra))
 
-def chaves(screen):
+def conta_chave(screen):
     qtdKeys = getQtdChaves() # pega a quantidade de chaves atualizada
     fonte = pygame.font.Font("Fonte.ttf", 36)
     texto = f"Chaves: {qtdKeys}/5"

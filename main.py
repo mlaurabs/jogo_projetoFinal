@@ -1,5 +1,5 @@
 import pygame
-from config import *
+from configuration import conta_chave, barra_de_vida, reiniciar_jogo
 from mapa import *
 from Player import *
 from inimigos import *
@@ -54,6 +54,9 @@ def update(dt):
 
     animacao_inimigo(dt)
     
+def get_estado_jogo():
+    return estado_jogo
+
 def draw_screen(screen):
     global direita, esquerda, cima, baixo, sentido, frames, anim_pos_x, anim_pos_y, spt_wdt, spt_hgt, anim_frame
  
@@ -61,7 +64,7 @@ def draw_screen(screen):
     draw_player(screen)
     draw_inimigo_1(screen)
     barra_de_vida(screen) # config
-    chaves(screen)
+    conta_chave(screen)
     
 def draw_objetivo(screen):
     image = pygame.image.load("Objetivo.png")
@@ -150,6 +153,7 @@ def processar_eventos_menu(eventos):
                     estado_jogo = objetivo
                     draw_objetivo(screen)
                 elif selecionado_menu == 2:
+                    print("NOVO JOGO")
                     pygame.quit()
                     exit()
 

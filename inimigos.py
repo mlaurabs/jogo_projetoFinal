@@ -1,5 +1,5 @@
 import pygame
-from config import *
+from configuration import *
 
 # bomba 1
 bomba_v1 = pygame.image.load("images/Bomba.png")
