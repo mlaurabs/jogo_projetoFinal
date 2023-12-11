@@ -14,10 +14,13 @@ fonte_menu = pygame.font.Font("Fonte.ttf", 40)
 menu = 0
 jogo = 1
 objetivo = 2
-derrota = False
+derrota = 3
+vitoria = 4
 
+width = 32 * 30 # largura da tela
+height = 32 * 20 # altura da tela
 
-opcoes_menu = ['Novo Jogo','Objetivo', 'Sair']
+opcoes_menu = ['Novo Jogo', 'Objetivo', 'Sair']
 
 selecionado_menu = 0
 
@@ -77,32 +80,56 @@ def processar_eventos_obj(eventos):
             if selecionado == 0:
                 estado_jogo = menu
                 draw_menu(screen)
-                    
-def draw_menu(screen):
-    
-    image = pygame.image.load("Fundo_Menu.png")
-    image = pygame.transform.scale(image, (960, 660))
-    screen.blit(image, (0, 0))
-    
-    
-    # opções do menu
-    for i, opcao in enumerate(opcoes_menu):
-        cor = (255, 192, 0) if i == selecionado_menu else (255, 255, 255)
-        texto_surface = fonte_menu.render(opcao, True, cor)
-        texto_rect = texto_surface.get_rect(center=(width // 2, height // 2.5 + i * 50))
-        screen.blit(texto_surface, texto_rect)
 
 def draw_vitoria(screen):
 
     image = pygame.image.load("Ganhou.png")
     image = pygame.transform.scale(image, (960, 660))
     screen.blit(image, (0, 0))
-
-    fonte = pygame.font.Font("Fonte.ttf", 40) 
+    fonte = pygame.font.Font("Fonte.ttf", 30) 
     texto = "Ir para o menu"
     texto_surface = fonte.render(texto, True, (255, 255, 255))
     texto_retangulo = texto_surface.get_rect(center=(width -100, height -60))
     screen.blit(texto_surface, texto_retangulo) 
+
+def processar_eventos_vit(eventos):
+    global selecionado, estado_jogo, menu
+    for evento in eventos:
+        if evento.type == pygame.KEYDOWN:
+            if selecionado == 0:
+                estado_jogo = menu
+                draw_menu(screen)
+
+def draw_derrota(screen):
+
+    image = pygame.image.load("Game_Over.png")
+    image = pygame.transform.scale(image, (960, 660))
+    screen.blit(image, (0, 0))
+    fonte = pygame.font.Font("Fonte.ttf", 30) 
+    texto = "Ir para o menu"
+    texto_surface = fonte.render(texto, True, (255, 255, 255))
+    texto_retangulo = texto_surface.get_rect(center=(width -800, height -60))
+    screen.blit(texto_surface, texto_retangulo) 
+
+def processar_eventos_der(eventos):
+    global selecionado, estado_jogo, menu
+    for evento in eventos:
+        if evento.type == pygame.KEYDOWN:
+            if selecionado == 0:
+                estado_jogo = menu
+                draw_menu(screen)
+                    
+def draw_menu(screen):
+    
+    image = pygame.image.load("Fundo_Menu.png")
+    image = pygame.transform.scale(image, (960, 660))
+    screen.blit(image, (0, 0))
+    # opções do menu
+    for i, opcao in enumerate(opcoes_menu):
+        cor = (255, 192, 0) if i == selecionado_menu else (255, 255, 255)
+        texto_surface = fonte_menu.render(opcao, True, cor)
+        texto_rect = texto_surface.get_rect(center=(width // 2, height // 2.5 + i * 50))
+        screen.blit(texto_surface, texto_rect)
     
 def processar_eventos_menu(eventos):
     global estado_jogo, selecionado_menu, objetivo
@@ -138,8 +165,11 @@ def main_loop(screen):
             processar_eventos_obj(eventos)
             draw_objetivo(screen)
         elif estado_jogo == derrota:
-            processar_eventos_derrota(eventos)
+            processar_eventos_der(eventos)
             draw_derrota(screen)
+        elif estado_jogo == vitoria:
+            processar_eventos_vit(eventos)
+            draw_vitoria(screen)
         elif estado_jogo == jogo:
             for evento in eventos:
                 if evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE:

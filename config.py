@@ -1,6 +1,7 @@
 import pygame
 from Player import *
 from inimigos import *
+from main import *
 from mapa import *
 
 
@@ -11,22 +12,19 @@ height = 32 * 20 # altura da tela
 cor_barra_cheia = (0, 254, 0)
 cor_barra_vazia = (255, 0, 0)
 
+derrota = False
+
 largura_barra = 200
 altura_barra = 20
 posicao_barra = [50, 20]
 vida_maxima = 100
 
 def barra_de_vida(screen):
+    global estado_jogo, derrota
     vida_atual = vida_Atual()
-    if vida_atual <= 0:
-        image = pygame.image.load("Objetivo.png")
-        image = pygame.transform.scale(image, (960, 660))
-        screen.blit(image, (0, 0))
-        fonte = pygame.font.Font("Fonte.ttf", 40) 
-        texto = "Voltar"
-        texto_surface = fonte.render(texto, True, (255, 192, 0))
-        texto_retangulo = texto_surface.get_rect(center=(width -100, height -60))
-        screen.blit(texto_surface, texto_retangulo) 
+    if vida_atual <= -1:
+        estado_jogo = derrota
+        draw_derrota(screen)
     else:
         pygame.draw.rect(screen, cor_barra_cheia, (posicao_barra[0], posicao_barra[1], largura_barra, altura_barra))
         largura_atual = int((vida_atual / vida_maxima) * largura_barra)
